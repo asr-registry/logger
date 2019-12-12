@@ -11,4 +11,5 @@
 - Session Logging 
 - Logging Factory 
 - Different Logging Level
+- Logging File Parser
 - And more
