@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import af.asr.logger.constant.ConfigurationDefault;
 
 /**
- * Console appender for Mosip
+ * Console appender 
 
  */
 @XmlRootElement

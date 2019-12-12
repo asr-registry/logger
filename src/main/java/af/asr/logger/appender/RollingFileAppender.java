@@ -6,14 +6,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * RollingFile appender for Mosip
+ * RollingFile appender 
 
  */
 @XmlRootElement
 public class RollingFileAppender extends FileAppender {
 
     /**
-     * RollingFileAppender for mosip The name of the rolled-over (archived) log
+     * RollingFileAppender The name of the rolled-over (archived) log
      * files.Its value should consist of the name of the file,<b> plus a suitably
      * placed %d</b> conversion specifier. The %d conversion specifier may contain a
      * date-and-time pattern as specified by the java.text.SimpleDateFormat

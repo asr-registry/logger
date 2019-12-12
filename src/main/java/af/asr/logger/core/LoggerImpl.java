@@ -27,7 +27,7 @@ import ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy;
 import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
 import ch.qos.logback.core.util.FileSize;
 /**
- * Logback implementation class for mosip
+ * Logback implementation class for phoenix
  *
  */
 public class LoggerImpl implements Logger {
@@ -47,11 +47,11 @@ public class LoggerImpl implements Logger {
     /**
      * Builds a logger instance
      *
-     * @param mosipConsoleAppender {@link ConsoleAppender} instance which contains
+     * @param phoenixConsoleAppender {@link ConsoleAppender} instance which contains
      *                             all configurations
      * @param name                 name of calling class to get logger
      */
-    private LoggerImpl(ConsoleAppender mosipConsoleAppender, String name, LogLevel logLevel) {
+    private LoggerImpl(ConsoleAppender phoenixConsoleAppender, String name, LogLevel logLevel) {
 
         LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
         this.logger = context.getLogger(name);
@@ -59,9 +59,9 @@ public class LoggerImpl implements Logger {
         ch.qos.logback.core.ConsoleAppender<ILoggingEvent> consoleAppender = new ch.qos.logback.core.ConsoleAppender<>();
         consoleAppender.setContext(context);
         consoleAppender.setEncoder(ple);
-        consoleAppender.setName(mosipConsoleAppender.getAppenderName());
-        consoleAppender.setImmediateFlush(mosipConsoleAppender.isImmediateFlush());
-        consoleAppender.setTarget(mosipConsoleAppender.getTarget());
+        consoleAppender.setName(phoenixConsoleAppender.getAppenderName());
+        consoleAppender.setImmediateFlush(phoenixConsoleAppender.isImmediateFlush());
+        consoleAppender.setTarget(phoenixConsoleAppender.getTarget());
         consoleAppender.start();
         if (logLevel != null) {
             this.logger.setLevel(Level.valueOf(logLevel.getLevel()));
@@ -75,31 +75,31 @@ public class LoggerImpl implements Logger {
     /**
      * Builds a logger instance
      *
-     * @param mosipFileAppender {@link FileAppender} instance which contains all
+     * @param phoenixFileAppender {@link FileAppender} instance which contains all
      *                          configurations
      * @param name              name of calling class to get logger
      */
-    private LoggerImpl(FileAppender mosipFileAppender, String name, LogLevel logLevel) {
+    private LoggerImpl(FileAppender phoenixFileAppender, String name, LogLevel logLevel) {
 
         LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
         this.logger = context.getLogger(name);
         this.logger.setAdditive(false);
         PatternLayoutEncoder ple = getdefaultPattern(context);
         ch.qos.logback.core.FileAppender<ILoggingEvent> fileAppender = null;
-        if (!fileAppenders.containsKey(mosipFileAppender.getAppenderName())) {
+        if (!fileAppenders.containsKey(phoenixFileAppender.getAppenderName())) {
             fileAppender = new ch.qos.logback.core.FileAppender<>();
             fileAppender.setContext(context);
             fileAppender.setEncoder(ple);
-            fileAppender.setName(mosipFileAppender.getAppenderName());
-            fileAppender.setImmediateFlush(mosipFileAppender.isImmediateFlush());
-            fileAppender.setAppend(mosipFileAppender.isAppend());
-            fileAppender.setFile(mosipFileAppender.getFileName());
-            fileAppender.setPrudent(mosipFileAppender.isPrudent());
+            fileAppender.setName(phoenixFileAppender.getAppenderName());
+            fileAppender.setImmediateFlush(phoenixFileAppender.isImmediateFlush());
+            fileAppender.setAppend(phoenixFileAppender.isAppend());
+            fileAppender.setFile(phoenixFileAppender.getFileName());
+            fileAppender.setPrudent(phoenixFileAppender.isPrudent());
             fileAppender.start();
             fileAppenders.put(fileAppender.getName(), fileAppender);
         } else {
             fileAppender = (ch.qos.logback.core.FileAppender<ILoggingEvent>) fileAppenders
-                    .get(mosipFileAppender.getAppenderName());
+                    .get(phoenixFileAppender.getAppenderName());
         }
         if (logLevel != null) {
             this.logger.setLevel(Level.valueOf(logLevel.getLevel()));
@@ -112,36 +112,36 @@ public class LoggerImpl implements Logger {
     /**
      * Builds a logger instance
      *
-     * @param mosipRollingFileAppender {@link RollingFileAppender} instance which
+     * @param phoenixRollingFileAppender {@link RollingFileAppender} instance which
      *                                 contains all configurations
      * @param name                     name of calling class to get logger
      */
-    private LoggerImpl(RollingFileAppender mosipRollingFileAppender, String name, LogLevel logLevel) {
+    private LoggerImpl(RollingFileAppender phoenixRollingFileAppender, String name, LogLevel logLevel) {
 
         LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
         this.logger = context.getLogger(name);
         this.logger.setAdditive(false);
         PatternLayoutEncoder ple = getdefaultPattern(context);
         ch.qos.logback.core.rolling.RollingFileAppender<ILoggingEvent> rollingFileAppender = null;
-        if (!rollingFileAppenders.containsKey(mosipRollingFileAppender.getAppenderName())) {
+        if (!rollingFileAppenders.containsKey(phoenixRollingFileAppender.getAppenderName())) {
             rollingFileAppender = new ch.qos.logback.core.rolling.RollingFileAppender<>();
             rollingFileAppender.setContext(context);
             rollingFileAppender.setEncoder(ple);
-            rollingFileAppender.setName(mosipRollingFileAppender.getAppenderName());
-            rollingFileAppender.setImmediateFlush(mosipRollingFileAppender.isImmediateFlush());
-            rollingFileAppender.setFile(mosipRollingFileAppender.getFileName());
-            rollingFileAppender.setAppend(mosipRollingFileAppender.isAppend());
-            rollingFileAppender.setPrudent(mosipRollingFileAppender.isPrudent());
-            if (mosipRollingFileAppender.getMaxFileSize().trim().isEmpty()) {
-                configureTimeBasedRollingPolicy(mosipRollingFileAppender, context, rollingFileAppender);
+            rollingFileAppender.setName(phoenixRollingFileAppender.getAppenderName());
+            rollingFileAppender.setImmediateFlush(phoenixRollingFileAppender.isImmediateFlush());
+            rollingFileAppender.setFile(phoenixRollingFileAppender.getFileName());
+            rollingFileAppender.setAppend(phoenixRollingFileAppender.isAppend());
+            rollingFileAppender.setPrudent(phoenixRollingFileAppender.isPrudent());
+            if (phoenixRollingFileAppender.getMaxFileSize().trim().isEmpty()) {
+                configureTimeBasedRollingPolicy(phoenixRollingFileAppender, context, rollingFileAppender);
             } else {
-                configureSizeAndTimeBasedPolicy(mosipRollingFileAppender, context, rollingFileAppender);
+                configureSizeAndTimeBasedPolicy(phoenixRollingFileAppender, context, rollingFileAppender);
             }
             rollingFileAppenders.put(rollingFileAppender.getName(), rollingFileAppender);
             rollingFileAppender.start();
         } else {
             rollingFileAppender = (ch.qos.logback.core.rolling.RollingFileAppender<ILoggingEvent>) rollingFileAppenders
-                    .get(mosipRollingFileAppender.getAppenderName());
+                    .get(phoenixRollingFileAppender.getAppenderName());
         }
         if (logLevel != null) {
             this.logger.setLevel(Level.valueOf(logLevel.getLevel()));
@@ -155,25 +155,25 @@ public class LoggerImpl implements Logger {
     /**
      * Configures size and time based policy
      *
-     * @param mosipRollingFileAppender {@link RollingFileAppender} instance to get
+     * @param phoenixRollingFileAppender {@link RollingFileAppender} instance to get
      *                                 values'p
      * @param context                  context of logger
      * @param rollingFileAppender      {@link RollingFileAppender} instance by which
      *                                 this policy will attach
      */
-    private void configureSizeAndTimeBasedPolicy(RollingFileAppender mosipRollingFileAppender, LoggerContext context,
+    private void configureSizeAndTimeBasedPolicy(RollingFileAppender phoenixRollingFileAppender, LoggerContext context,
                                                  ch.qos.logback.core.rolling.RollingFileAppender<ILoggingEvent> rollingFileAppender) {
         SizeAndTimeBasedRollingPolicy<ILoggingEvent> sizeAndTimeBasedRollingPolicy = new SizeAndTimeBasedRollingPolicy<>();
         sizeAndTimeBasedRollingPolicy.setContext(context);
 
-        sizeAndTimeBasedRollingPolicy.setFileNamePattern(mosipRollingFileAppender.getFileNamePattern());
-        sizeAndTimeBasedRollingPolicy.setMaxHistory(mosipRollingFileAppender.getMaxHistory());
-        if (mosipRollingFileAppender.getTotalCap() != null
-                && !mosipRollingFileAppender.getTotalCap().trim().isEmpty()) {
-            sizeAndTimeBasedRollingPolicy.setTotalSizeCap(FileSize.valueOf(mosipRollingFileAppender.getTotalCap()));
+        sizeAndTimeBasedRollingPolicy.setFileNamePattern(phoenixRollingFileAppender.getFileNamePattern());
+        sizeAndTimeBasedRollingPolicy.setMaxHistory(phoenixRollingFileAppender.getMaxHistory());
+        if (phoenixRollingFileAppender.getTotalCap() != null
+                && !phoenixRollingFileAppender.getTotalCap().trim().isEmpty()) {
+            sizeAndTimeBasedRollingPolicy.setTotalSizeCap(FileSize.valueOf(phoenixRollingFileAppender.getTotalCap()));
         }
-        if (mosipRollingFileAppender.getMaxFileSize() != null) {
-            sizeAndTimeBasedRollingPolicy.setMaxFileSize(FileSize.valueOf(mosipRollingFileAppender.getMaxFileSize()));
+        if (phoenixRollingFileAppender.getMaxFileSize() != null) {
+            sizeAndTimeBasedRollingPolicy.setMaxFileSize(FileSize.valueOf(phoenixRollingFileAppender.getMaxFileSize()));
         }
         sizeAndTimeBasedRollingPolicy.setParent(rollingFileAppender);
         rollingFileAppender.setRollingPolicy(sizeAndTimeBasedRollingPolicy);
@@ -183,25 +183,25 @@ public class LoggerImpl implements Logger {
     /**
      * Configures time based policy
      *
-     * @param mosipRollingFileAppender {@link RollingFileAppender} instance to get
+     * @param phoenixRollingFileAppender {@link RollingFileAppender} instance to get
      *                                 values
      * @param context                  context of logger
      * @param rollingFileAppender      {@link RollingFileAppender} instance by which
      *                                 this policy will attach
      */
-    private void configureTimeBasedRollingPolicy(RollingFileAppender mosipRollingFileAppender, LoggerContext context,
+    private void configureTimeBasedRollingPolicy(RollingFileAppender phoenixRollingFileAppender, LoggerContext context,
                                                  ch.qos.logback.core.rolling.RollingFileAppender<ILoggingEvent> rollingFileAppender) {
         TimeBasedRollingPolicy<ILoggingEvent> timeBasedRollingPolicy = new TimeBasedRollingPolicy<>();
         timeBasedRollingPolicy.setContext(context);
-        timeBasedRollingPolicy.setFileNamePattern(mosipRollingFileAppender.getFileNamePattern());
-        timeBasedRollingPolicy.setMaxHistory(mosipRollingFileAppender.getMaxHistory());
-        if (mosipRollingFileAppender.getFileNamePattern().contains("%i")) {
+        timeBasedRollingPolicy.setFileNamePattern(phoenixRollingFileAppender.getFileNamePattern());
+        timeBasedRollingPolicy.setMaxHistory(phoenixRollingFileAppender.getMaxHistory());
+        if (phoenixRollingFileAppender.getFileNamePattern().contains("%i")) {
             throw new PatternSyntaxException(LogExeptionCodeConstant.PATTERNSYNTAXEXCEPTION.getValue(),
                     LogExeptionCodeConstant.PATTERNSYNTAXEXCEPTIONMESSAGENOTI.getValue());
         }
-        if (mosipRollingFileAppender.getTotalCap() != null
-                && !mosipRollingFileAppender.getTotalCap().trim().isEmpty()) {
-            timeBasedRollingPolicy.setTotalSizeCap(FileSize.valueOf(mosipRollingFileAppender.getTotalCap()));
+        if (phoenixRollingFileAppender.getTotalCap() != null
+                && !phoenixRollingFileAppender.getTotalCap().trim().isEmpty()) {
+            timeBasedRollingPolicy.setTotalSizeCap(FileSize.valueOf(phoenixRollingFileAppender.getTotalCap()));
         }
         timeBasedRollingPolicy.setParent(rollingFileAppender);
         rollingFileAppender.setRollingPolicy(timeBasedRollingPolicy);
@@ -298,7 +298,7 @@ public class LoggerImpl implements Logger {
     /*
      * (non-Javadoc)
      *
-     * @see io.mosip.kernel.core.logging.Logger#debug(java.lang.String,
+     * @see Logger#debug(java.lang.String,
      * java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
@@ -310,7 +310,7 @@ public class LoggerImpl implements Logger {
     /*
      * (non-Javadoc)
      *
-     * @see io.mosip.kernel.core.logging.Logger#warn(java.lang.String,
+     * @see Logger#warn(java.lang.String,
      * java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
@@ -322,7 +322,7 @@ public class LoggerImpl implements Logger {
     /*
      * (non-Javadoc)
      *
-     * @see io.mosip.kernel.core.logging.Logger#error(java.lang.String,
+     * @see Logger#error(java.lang.String,
      * java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
@@ -334,7 +334,7 @@ public class LoggerImpl implements Logger {
     /*
      * (non-Javadoc)
      *
-     * @see io.mosip.kernel.core.logging.Logger#info(java.lang.String,
+     * @see Logger#info(java.lang.String,
      * java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
@@ -346,7 +346,7 @@ public class LoggerImpl implements Logger {
     /*
      * (non-Javadoc)
      *
-     * @see io.mosip.kernel.core.logging.Logger#trace(java.lang.String,
+     * @see Logger#trace(java.lang.String,
      * java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
@@ -355,7 +355,7 @@ public class LoggerImpl implements Logger {
     }
 
     /**
-     * Configures Layout for Mosip
+     * Configures Layout for phoenix
      *
      * @param context {@link LoggerContext} instance
      * @return {@link PatternLayoutEncoder} instance

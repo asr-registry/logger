@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is the base class for all MOSIP checked exceptions.
+ * This is the base class for all  checked exceptions.
  *
  * The class and its subclasses are a form that indicates conditions that a
  * reasonable application might want to catch.

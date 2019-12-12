@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is the base class for all MOSIP unchecked exceptions.
+ * This is the base class for all unchecked exceptions.
  *
  * {@code BaseUncheckedException} is the superclass of those exceptions that can
  * be thrown during the normal operation of the Java Virtual Machine.
