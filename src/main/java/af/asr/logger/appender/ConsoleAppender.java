@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import af.asr.logger.constant.ConfigurationDefault;
-import io.mosip.kernel.logger.logback.constant.ConfigurationDefault;
 
 /**
  * Console appender for Mosip
