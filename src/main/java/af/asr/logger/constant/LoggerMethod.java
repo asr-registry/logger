@@ -1,4 +1,4 @@
-package af.asr.logger.core;
+package af.asr.logger.constant;
 
 public enum LoggerMethod {
 
