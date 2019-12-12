@@ -7,13 +7,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import af.asr.logger.constant.LogExeptionCodeConstant;
-import io.mosip.kernel.core.logger.exception.XMLConfigurationParseException;
+import af.asr.logger.exception.logger.XMLConfigurationParseException;
 
 /**
  * This is utility class for Logger
- *
- * @author Urvil Joshi
- * @since 1.0.0
  */
 public class LoggerUtils {
     /**
